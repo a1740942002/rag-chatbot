@@ -7,7 +7,7 @@ import {
 } from '@/lib/db/schema/resources'
 import { db } from '../db'
 import { generateEmbeddings } from '../ai/embedding'
-import { embeddings as embeddingsTable } from '../db/schema/embeddings'
+import { memoriesTable } from '../db/schema/memories'
 
 export const createResource = async (input: NewResourceParams) => {
   try {
@@ -19,7 +19,7 @@ export const createResource = async (input: NewResourceParams) => {
       .returning()
 
     const embeddings = await generateEmbeddings(content)
-    await db.insert(embeddingsTable).values(
+    await db.insert(memoriesTable).values(
       embeddings.map((embedding) => ({
         resourceId: resource.id,
         ...embedding
