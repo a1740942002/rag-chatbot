@@ -1,0 +1,17 @@
+version: '3'
+services:
+  ai-sdk-rag-postgres:
+    image: pgvector/pgvector:pg17
+    container_name: ai-sdk-rag-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ai-sdk-rag-postgres
+    ports:
+      - '5432:5432'
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
